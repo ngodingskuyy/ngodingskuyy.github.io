@@ -1,0 +1,50 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="codeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34d399;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="url(#bgGradient)"/>
+  
+  <!-- Code brackets -->
+  <g transform="translate(80, 120)">
+    <!-- Left bracket -->
+    <path d="M50 0 L20 0 L20 50 L0 50 L0 222 L20 222 L20 272 L50 272 L50 242 L30 242 L30 222 L50 222 L50 50 L30 50 L30 30 L50 30 Z" 
+          fill="white" opacity="0.9"/>
+    
+    <!-- Right bracket -->
+    <path d="M302 0 L332 0 L332 30 L312 30 L312 50 L332 50 L332 222 L312 222 L312 242 L332 242 L332 272 L302 272 L302 222 L322 222 L322 50 L302 50 Z" 
+          fill="white" opacity="0.9"/>
+  </g>
+  
+  <!-- Code symbols -->
+  <g transform="translate(150, 180)" fill="url(#codeGradient)">
+    <!-- Forward slash -->
+    <rect x="0" y="0" width="20" height="6" rx="3" transform="rotate(20)"/>
+    <rect x="15" y="25" width="20" height="6" rx="3" transform="rotate(20)"/>
+    <rect x="30" y="50" width="20" height="6" rx="3" transform="rotate(20)"/>
+    
+    <!-- Dots representing code -->
+    <circle cx="80" cy="20" r="8"/>
+    <circle cx="110" cy="20" r="8"/>
+    <circle cx="140" cy="20" r="8"/>
+    
+    <!-- Greater than symbol -->
+    <path d="M170 10 L190 30 L170 50 L175 55 L200 30 L175 5 Z"/>
+    
+    <!-- Underscore -->
+    <rect x="80" y="65" width="80" height="6" rx="3"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="256" y="400" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">
+    NgodingSkuyy
+  </text>
+</svg>
