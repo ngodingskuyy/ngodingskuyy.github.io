@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useLocaleStore } from '../stores/locale'
+
+const localeStore = useLocaleStore()
+const { t } = storeToRefs(localeStore)
 const currentYear = new Date().getFullYear()
 
 const socialLinks = [
@@ -18,14 +23,6 @@ const socialLinks = [
     icon: 'M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z',
   },
 ]
-
-const quickLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Discord', url: 'https://discord.gg/uhZWnUeeW8' },
-  { name: 'Projects', url: 'https://github.com/ngodingskuyy' },
-  { name: 'Contact', url: 'mailto:contact@ngodingskuyy.com' },
-]
 </script>
 
 <template>
@@ -36,8 +33,7 @@ const quickLinks = [
         <div class="footer-brand">
           <h3 class="brand-name">NgodingSkuyy</h3>
           <p class="brand-description">
-            Komunitas developer Indonesia yang passionate dalam berbagi ilmu dan membangun masa
-            depan teknologi.
+            {{ t.footer.brandDescription }}
           </p>
           <div class="social-links">
             <a
@@ -57,14 +53,31 @@ const quickLinks = [
 
         <!-- Quick Links -->
         <div class="footer-section">
-          <h4 class="section-title">Quick Links</h4>
+          <h4 class="section-title">{{ t.footer.quickLinks.title }}</h4>
           <ul class="link-list">
-            <li v-for="link in quickLinks" :key="link.name">
-              <RouterLink v-if="link.path" :to="link.path" class="footer-link">
-                {{ link.name }}
+            <li>
+              <RouterLink to="/" class="footer-link">
+                {{ t.footer.quickLinks.home }}
               </RouterLink>
-              <a v-else :href="link.url" target="_blank" class="footer-link">
-                {{ link.name }}
+            </li>
+            <li>
+              <RouterLink to="/about" class="footer-link">
+                {{ t.footer.quickLinks.about }}
+              </RouterLink>
+            </li>
+            <li>
+              <a href="https://discord.gg/uhZWnUeeW8" target="_blank" class="footer-link">
+                {{ t.footer.quickLinks.discord }}
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/ngodingskuyy" target="_blank" class="footer-link">
+                {{ t.footer.quickLinks.projects }}
+              </a>
+            </li>
+            <li>
+              <a href="mailto:contact@ngodingskuyy.com" class="footer-link">
+                {{ t.footer.quickLinks.contact }}
               </a>
             </li>
           </ul>
@@ -72,15 +85,17 @@ const quickLinks = [
 
         <!-- Community -->
         <div class="footer-section">
-          <h4 class="section-title">Community</h4>
+          <h4 class="section-title">{{ t.footer.community.title }}</h4>
           <ul class="link-list">
             <li>
               <a href="https://github.com/ngodingskuyy" target="_blank" class="footer-link">
-                GitHub Organization
+                {{ t.footer.community.github }}
               </a>
             </li>
             <li>
-              <a href="mailto:contact@ngodingskuyy.com" class="footer-link"> Get in Touch </a>
+              <a href="mailto:contact@ngodingskuyy.com" class="footer-link">
+                {{ t.footer.community.contact }}
+              </a>
             </li>
             <li>
               <a
@@ -88,7 +103,7 @@ const quickLinks = [
                 target="_blank"
                 class="footer-link"
               >
-                Contribute
+                {{ t.footer.community.contribute }}
               </a>
             </li>
           </ul>
@@ -96,21 +111,21 @@ const quickLinks = [
 
         <!-- Resources -->
         <div class="footer-section">
-          <h4 class="section-title">Resources</h4>
+          <h4 class="section-title">{{ t.footer.resources.title }}</h4>
           <ul class="link-list">
             <li>
               <a href="https://github.com/ngodingskuyy" target="_blank" class="footer-link">
-                Open Source Projects
+                {{ t.footer.resources.projects }}
               </a>
             </li>
             <li>
               <a href="https://github.com/ngodingskuyy" target="_blank" class="footer-link">
-                Documentation
+                {{ t.footer.resources.documentation }}
               </a>
             </li>
             <li>
               <a href="https://github.com/ngodingskuyy" target="_blank" class="footer-link">
-                Best Practices
+                {{ t.footer.resources.bestPractices }}
               </a>
             </li>
           </ul>
@@ -120,8 +135,8 @@ const quickLinks = [
       <!-- Footer Bottom -->
       <div class="footer-bottom">
         <div class="footer-bottom-content">
-          <p class="copyright">© {{ currentYear }} NgodingSkuyy. Made with ❤️ by the community.</p>
-          <p class="built-with">Built with Vue.js & TypeScript</p>
+          <p class="copyright">© {{ currentYear }} NgodingSkuyy. {{ t.footer.bottom.madeWith }}</p>
+          <p class="built-with">{{ t.footer.bottom.builtWith }}</p>
         </div>
       </div>
     </div>
