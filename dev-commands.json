@@ -1,0 +1,20 @@
+{
+  "name": "NgodingSkuyy Development",
+  "description": "Development environment untuk NgodingSkuyy landing page",
+  "version": "1.0.0",
+  "scripts": {
+    "🚀 Start Development": "npm run dev",
+    "🏗️ Build Production": "npm run build",
+    "🔍 Preview Build": "npm run preview",
+    "🧪 Run Tests": "npm run test:unit",
+    "📦 Deploy": "npm run deploy",
+    "🎨 Generate Icons": "npm run generate-icons",
+    "🔧 Lint & Fix": "npm run lint",
+    "✨ Format Code": "npm run format"
+  },
+  "urls": {
+    "🌐 Development": "http://localhost:5173",
+    "🚀 Production": "https://ngodingskuyy.github.io",
+    "📱 GitHub": "https://github.com/ngodingskuyy"
+  }
+}
