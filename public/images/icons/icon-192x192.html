@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; padding: 0; }
+    .icon {
+      width: 192px;
+      height: 192px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 28.799999999999997px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .code-symbol {
+      color: white;
+      font-family: 'Courier New', monospace;
+      font-size: 76.80000000000001px;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .brackets {
+      position: absolute;
+      color: rgba(255,255,255,0.8);
+      font-family: 'Courier New', monospace;
+      font-size: 57.599999999999994px;
+      font-weight: bold;
+    }
+    .left-bracket {
+      left: 19.200000000000003px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .right-bracket {
+      right: 19.200000000000003px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="icon">
+    <span class="brackets left-bracket">{</span>
+    <span class="code-symbol">NS</span>
+    <span class="brackets right-bracket">}</span>
+  </div>
+</body>
+</html>
