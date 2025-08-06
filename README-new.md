@@ -1,4 +1,4 @@
-# NgodingSkuyy - Komunitas Developer Indonesia
+# NgodingSkuyy
 
 [![Deploy to GitHub Pages](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

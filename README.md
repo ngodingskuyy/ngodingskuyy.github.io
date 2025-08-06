@@ -1,4 +1,4 @@
-# NgodingSkuyy - Komunitas Developer Indonesia
+# NgodingSkuyy
 
 [![Deploy to GitHub Pages](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/deploy.yml)
 [![Firebase Hosting](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/firebase-hosting-merge.yml)
