@@ -1,6 +1,7 @@
 # NgodingSkuyy - Komunitas Developer Indonesia
 
 [![Deploy to GitHub Pages](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/deploy.yml)
+[![Firebase Hosting](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/ngodingskuyy/ngodingskuyy.github.io/actions/workflows/firebase-hosting-merge.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 🚀 **Landing page resmi untuk komunitas NgodingSkuyy** - Tempat berkumpulnya developer Indonesia yang passionate dalam berbagi ilmu, pengalaman, dan membangun proyek-proyek inovatif bersama.
