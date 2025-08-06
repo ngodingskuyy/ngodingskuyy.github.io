@@ -1,12 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocaleStore } from '../stores/locale'
+import { useAnalytics } from '../composables/useAnalytics'
+import { usePerformance } from '../composables/usePerformance'
+import { ProjectsService } from '../firebase/firestore'
+
+// Project interface
+interface Project {
+  id?: string
+  name: string
+  description: string
+  tech: string[]
+  link: string
+  githubUrl?: string
+  technologies?: string[]
+  createdAt?: Date
+  updatedAt?: Date
+}
+
+// Firestore document interface
+interface FirestoreProject {
+  id: string
+  [key: string]: unknown
+}
 
 const localeStore = useLocaleStore()
 const { t } = storeToRefs(localeStore)
+const { trackPageView, trackJoinCommunity } = useAnalytics()
+const { trackPageLoad, trackComponentMount, trackAPICall, trackUserAction } = usePerformance()
 
-const projects = ref([
+// Firebase projects data - properly typed
+// Firebase projects data - properly typed
+const firebaseProjects = ref<Project[]>([])
+const loadingProjects = ref(false)
+
+// Static projects as fallback
+const projects = ref<Project[]>([
   {
     name: 'Web Development Starter',
     description: 'A complete starter template for modern web applications',
@@ -26,6 +56,61 @@ const projects = ref([
     link: 'https://github.com/ngodingskuyy',
   },
 ])
+
+// Load projects from Firebase with performance tracking
+const loadFirebaseProjects = async () => {
+  const apiTracker = trackAPICall('projects')
+
+  try {
+    loadingProjects.value = true
+    const firebaseData = await ProjectsService.getProjects()
+
+    // Transform Firebase data to match Project interface
+    firebaseProjects.value = firebaseData.map((item: FirestoreProject) => ({
+      id: item.id,
+      name: (item.name as string) || 'Untitled Project',
+      description: (item.description as string) || 'No description available',
+      tech: (item.technologies as string[]) || (item.tech as string[]) || [],
+      link: (item.githubUrl as string) || (item.link as string) || '#',
+      githubUrl: item.githubUrl as string,
+      technologies: item.technologies as string[],
+      createdAt: item.createdAt as Date,
+      updatedAt: item.updatedAt as Date,
+    })) as Project[]
+
+    apiTracker.success()
+  } catch {
+    console.log('Firebase projects not available, using static data')
+    apiTracker.error('firebase_unavailable')
+  } finally {
+    loadingProjects.value = false
+  }
+}
+
+const handleJoinCommunity = () => {
+  trackUserAction('click', 'join_community_button')
+  trackJoinCommunity('hero_cta')
+  window.open('https://discord.gg/uhZWnUeeW8', '_blank')
+}
+
+const handleProjectClick = (projectName: string) => {
+  trackUserAction('click', `project_${projectName.replace(/\s+/g, '_').toLowerCase()}`)
+}
+
+// Performance tracking
+const componentMountTracker = trackComponentMount('HomeView')
+
+onMounted(() => {
+  // Track page performance
+  trackPageLoad('home')
+  trackPageView('Home')
+
+  // Load Firebase projects
+  loadFirebaseProjects()
+
+  // Finish component mount tracking
+  componentMountTracker.finish()
+})
 </script>
 
 <template>
@@ -47,9 +132,9 @@ const projects = ref([
             {{ t.hero.description }}
           </p>
           <div class="hero-buttons">
-            <a href="https://discord.gg/uhZWnUeeW8" target="_blank" class="btn btn-primary">
+            <button @click="handleJoinCommunity" class="btn btn-primary">
               {{ t.hero.ctaJoin }}
-            </a>
+            </button>
             <a href="https://github.com/ngodingskuyy" target="_blank" class="btn btn-secondary">
               {{ t.hero.ctaExplore }}
             </a>
@@ -133,9 +218,14 @@ const projects = ref([
               </div>
             </div>
             <div class="project-footer">
-              <a :href="project.link" target="_blank" class="project-link"
-                >{{ t.projects.viewProject }} →</a
+              <a
+                :href="project.link"
+                target="_blank"
+                class="project-link"
+                @click="handleProjectClick(project.name)"
               >
+                {{ t.projects.viewProject }} →
+              </a>
             </div>
           </div>
         </div>

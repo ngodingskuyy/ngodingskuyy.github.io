@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocaleStore } from '../stores/locale'
+import { usePerformance } from '../composables/usePerformance'
+import { useAnalytics } from '../composables/useAnalytics'
 
 const localeStore = useLocaleStore()
 const { t } = storeToRefs(localeStore)
+const { trackComponentMount } = usePerformance()
+const { trackPageView } = useAnalytics()
+
+onMounted(async () => {
+  // Track component mount
+  await trackComponentMount('AboutView')
+
+  // Track analytics
+  trackPageView('About')
+})
 </script>
 
 <template>

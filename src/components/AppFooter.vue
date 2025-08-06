@@ -1,10 +1,32 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLocaleStore } from '../stores/locale'
+import { usePerformance } from '../composables/usePerformance'
+import { useAnalytics } from '../composables/useAnalytics'
 
 const localeStore = useLocaleStore()
 const { t } = storeToRefs(localeStore)
+const { trackComponentMount, trackUserAction } = usePerformance()
+const { trackButtonClick } = useAnalytics()
+
 const currentYear = new Date().getFullYear()
+
+onMounted(async () => {
+  // Track component mount
+  await trackComponentMount('AppFooter')
+})
+
+const handleSocialClick = async (platform: string, url: string) => {
+  // Track user action for performance
+  await trackUserAction('social_link_click', platform)
+
+  // Track analytics
+  trackButtonClick(`${platform}_footer`, 'footer')
+
+  // Open link
+  window.open(url, '_blank', 'noopener,noreferrer')
+}
 
 const socialLinks = [
   {
@@ -39,10 +61,9 @@ const socialLinks = [
             <a
               v-for="social in socialLinks"
               :key="social.name"
-              :href="social.url"
               :title="social.name"
-              target="_blank"
               class="social-link"
+              @click.prevent="handleSocialClick(social.name, social.url)"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path :d="social.icon" />

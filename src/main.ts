@@ -6,10 +6,28 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+// Initialize Firebase
+import './firebase/config'
+import { useAuthStore } from './stores/auth'
 
-app.use(createPinia())
+// Development Firebase settings
+import { setupFirebaseDevSettings, checkFirebaseConnection } from './firebase/dev-utils'
+
+const app = createApp(App)
+const pinia = createPinia()
+
+app.use(pinia)
 app.use(router)
+
+// Setup development Firebase settings
+if (import.meta.env.DEV) {
+    setupFirebaseDevSettings()
+    setTimeout(checkFirebaseConnection, 1000) // Check connection after app loads
+}
+
+// Initialize auth store after Pinia is set up
+const authStore = useAuthStore()
+authStore.initAuth()
 
 app.mount('#app')
 
