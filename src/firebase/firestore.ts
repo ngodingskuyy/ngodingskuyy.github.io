@@ -28,6 +28,9 @@ const handleFirebaseError = (error: unknown, operation: string) => {
 export class FirestoreService {
     // Create a document
     static async create(collectionName: string, data: DocumentData) {
+        if (!db) {
+            throw new Error('Firestore not initialized')
+        }
         try {
             const docRef = await addDoc(collection(db, collectionName), {
                 ...data,
@@ -41,8 +44,11 @@ export class FirestoreService {
         }
     }
 
-    // Read a single document
-    static async getById(collectionName: string, id: string) {
+    // Read a document
+    static async read(collectionName: string, id: string) {
+        if (!db) {
+            throw new Error('Firestore not initialized')
+        }
         try {
             const docRef = doc(db, collectionName, id)
             const docSnap = await getDoc(docRef)
@@ -60,6 +66,9 @@ export class FirestoreService {
 
     // Read multiple documents with optional constraints
     static async getAll(collectionName: string, constraints: QueryConstraint[] = []) {
+        if (!db) {
+            throw new Error('Firestore not initialized')
+        }
         try {
             const q = query(collection(db, collectionName), ...constraints)
             const querySnapshot = await getDocs(q)
@@ -76,6 +85,9 @@ export class FirestoreService {
 
     // Update a document
     static async update(collectionName: string, id: string, data: Partial<DocumentData>) {
+        if (!db) {
+            throw new Error('Firestore not initialized')
+        }
         try {
             const docRef = doc(db, collectionName, id)
             await updateDoc(docRef, {
@@ -91,6 +103,9 @@ export class FirestoreService {
 
     // Delete a document
     static async delete(collectionName: string, id: string) {
+        if (!db) {
+            throw new Error('Firestore not initialized')
+        }
         try {
             const docRef = doc(db, collectionName, id)
             await deleteDoc(docRef)
@@ -116,7 +131,7 @@ export const ProjectsService = {
     },
 
     async getProject(id: string) {
-        return FirestoreService.getById('projects', id)
+        return FirestoreService.read('projects', id)
     },
 
     async createProject(projectData: DocumentData) {
@@ -140,7 +155,7 @@ export const MembersService = {
     },
 
     async getMember(id: string) {
-        return FirestoreService.getById('members', id)
+        return FirestoreService.read('members', id)
     },
 
     async createMember(memberData: DocumentData) {

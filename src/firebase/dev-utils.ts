@@ -48,6 +48,11 @@ export const checkFirebaseConnection = async () => {
         const { db } = await import('./config')
         const { doc, getDoc } = await import('firebase/firestore')
 
+        if (!db) {
+            console.log('⚠️ Firebase not configured')
+            return false
+        }
+
         await getDoc(doc(db, 'test', 'test'))
         console.log('✅ Firebase connection: OK')
         return true

@@ -22,6 +22,9 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Actions
   const login = async (email: string, password: string) => {
+    if (!auth) {
+      throw new Error('Firebase Auth not initialized')
+    }
     try {
       error.value = null
       loading.value = true
@@ -38,6 +41,9 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const register = async (email: string, password: string, displayName?: string) => {
+    if (!auth) {
+      throw new Error('Firebase Auth not initialized')
+    }
     try {
       error.value = null
       loading.value = true
@@ -59,6 +65,9 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const logout = async () => {
+    if (!auth) {
+      throw new Error('Firebase Auth not initialized')
+    }
     try {
       error.value = null
       await signOut(auth)
@@ -76,6 +85,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Initialize auth state listener
   const initAuth = () => {
+    if (!auth) {
+      console.warn('Firebase Auth not initialized, skipping auth state listener')
+      loading.value = false
+      return
+    }
     onAuthStateChanged(auth, (firebaseUser) => {
       user.value = firebaseUser
       loading.value = false
