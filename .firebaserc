@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "ngodingskuyy-id"
-  }
+  },
+  "targets": {
+    "ngodingskuyy-id": {
+      "hosting": {
+        "main": [
+          "ngodingskuyy"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

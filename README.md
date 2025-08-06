@@ -13,6 +13,9 @@
 - ⚡ **Fast Loading** - Dibangun dengan Vite untuk performa optimal
 - 🎨 **Gradient Design** - Visual yang menarik dengan modern color scheme
 - 🔍 **SEO Optimized** - Meta tags dan structured data yang lengkap
+- 🔥 **Firebase Integration** - Authentication, Analytics, Performance & Hosting
+- 🌍 **Internationalization** - Support Bahasa Indonesia & English
+- 🌙 **Dark Mode** - Switch tema light/dark mode
 
 ## 🛠️ Tech Stack
 
@@ -22,9 +25,12 @@
 - **Styling**: CSS3 dengan custom properties
 - **Routing**: Vue Router
 - **State Management**: Pinia
+- **Backend Services**: Firebase (Auth, Firestore, Analytics, Performance, Hosting)
+- **Internationalization**: Vue I18n dengan Pinia store
 - **PWA**: Service Worker dengan caching strategy
 - **Testing**: Vitest
 - **Linting**: ESLint + Prettier
+- **Deployment**: Firebase Hosting + GitHub Pages
 
 ## 🚀 Quick Start
 
@@ -73,6 +79,12 @@ npm run generate-icons
 
 # Deploy to GitHub Pages
 npm run deploy
+
+# Deploy to Firebase Hosting
+npm run deploy:firebase
+
+# Test Firebase hosting locally
+npm run firebase:serve
 ```
 
 ## 📁 Project Structure
@@ -141,6 +153,22 @@ ngodingskuyy.github.io/
 # Build dan deploy otomatis
 npm run deploy
 ```
+
+### Firebase Hosting ⭐
+
+```bash
+# Build dan deploy ke Firebase
+npm run deploy:firebase
+
+# Test locally sebelum deploy
+npm run firebase:serve
+
+# First time setup (jika diperlukan)
+npm run firebase:login
+npm run firebase:init
+```
+
+**Live URL**: https://ngodingskuyy.web.app
 
 ### Manual Deployment
 
